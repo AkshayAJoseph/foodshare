@@ -134,5 +134,107 @@ function handleBackButton(fallbackUrl) {
       alert(error);
     }
   }
+
+  async function runAI(base64) {
+    try {
+      const prompt =
+        "if the image has any products in it send only a json containing {name,quantity,lifespan} lifespan being an estimate of the food life in hours, the quantity being the number of servings of the product in the picture, of all unique products seen in the picture";
+      const model = genAI.getGenerativeModel({
+        model: "gemini-1.5-pro",
+        generationConfig: {
+          response_mime_type: "application/json",
+        },
+      });
+  
+      console.log("t2");
+  
+      const imageParts = [
+        {
+          inlineData: {
+            data: base64,
+            mimeType: "image/jpeg",
+          },
+        },
+      ];
+  
+      console.log("t3");
+  
+      const generatedContent = await model.generateContent([
+        prompt,
+        ...imageParts,
+      ]);
+  
+      console.log("t4");
+  
+      const output = generatedContent.response.text();
+      const out = JSON.parse(output);
+      console.log(out);
+      if (!out.products) {
+        const response = await fetch(`${baseUrl}/food`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: out.name,
+            quantity: Number(out.quantity),
+            lifespan: Number(out.expiry),
+          }),
+        });
+        const res = await response.json();
+        if (!response.ok) {
+          console.log(res);
+          return;
+        }
+        // console.log(res);
+        // const userdata = await checkUser();
+        // const userid = userdata.id;
+        // const id = res.data.id;
+        // const response3 = await fetch(`${baseUrl}/ingredient/${userid}`, {
+        //   method: "PUT",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify({
+        //     ingid: id,
+        //   }),
+        // });
+  
+        // const res3 = await response3.json();
+        // if (!response3.ok) {
+        //   alert(res3.message);
+        //   return;
+        // }
+        // console.log(res3);
+  
+        // alert("Product added");
+        console.log(res)
+        return;
+      }
+  
+      const arr = out.products;
+  
+      const data = arr.map(async (d) => {
+        const response = await fetch(`${baseUrl}/food`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: d.name,
+            quantity: d.quantity,
+            lifespan: d.lifespan,
+          }),
+        });
+        const res = await response.json();
+        if (!response.ok) {
+          alert(res.message);
+        }
+        console.log(res);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
   
   export {handleBackButton, checkUser, logout, login, signup, takephoto}

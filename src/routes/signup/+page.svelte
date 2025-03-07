@@ -5,8 +5,12 @@
     let name = $state("");
     handleBackButton("/login");
     const onclick = () => {
-        const data = { email, password, name };
-        signup(data);
+        if (email != "" && password != "" && name != "") {
+            const data = { email, password, name };
+            signup(data);
+        } else {
+            alert("Please fill in every fields");
+        }
     };
     import Header from "$lib/Header.svelte";
     import Navigation from "$lib/Navigation.svelte";
@@ -36,7 +40,11 @@
                     </div>
                     <div class="form__row">
                         <label>Name</label>
-                        <input bind:value={name} />
+                        <input
+                            bind:value={name}
+                            placeholder="Hari Narayan"
+                            required
+                        />
                     </div>
                     <div class="form__row">
                         <label>Email</label>
@@ -44,13 +52,21 @@
                             type="text"
                             placeholder="hari@laddu.cc"
                             bind:value={email}
+                            required
                         />
                     </div>
                     <div class="form__row">
                         <label>Password</label>
-                        <input type="password" bind:value={password} />
+                        <input
+                            type="password"
+                            bind:value={password}
+                            placeholder="********"
+                            required
+                        />
                     </div>
-                    <div class="btn--black">hey</div>
+                    <a href="/home" {onclick}>
+                        <div class="btn--black">Register</div>
+                    </a>
                 </div>
             </div>
         </div>

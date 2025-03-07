@@ -4,7 +4,6 @@
     import { Storage } from "@capacitor/storage";
 
     import Header from "$lib/Header.svelte";
-    import Navigation from "$lib/Navigation.svelte";
     import Progress from "$lib/Progress.svelte";
 
     handleBackButton("/");

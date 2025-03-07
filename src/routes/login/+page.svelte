@@ -12,7 +12,6 @@
         }
     };
     import Header from "$lib/Header.svelte";
-    import Navigation from "$lib/Navigation.svelte";
     import Progress from "$lib/Progress.svelte";
 </script>
 

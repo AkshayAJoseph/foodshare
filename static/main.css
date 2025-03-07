@@ -75,8 +75,8 @@ p {
 .card {
     background: var(--color-white);
     padding: 1.5rem;
-    padding-bottom: 1rem;
     border-radius: 1rem;
+    margin: 2rem auto;
 }
 
 .card__title {
@@ -92,7 +92,66 @@ p {
 
 .card__title h5 {
     font-size: 0.75rem;
-    font-weight: 400;
+    font-weight: 600;
+    color: var(--color-text-light);
+}
+
+.card__filters {
+    display: flex;
+    gap: 1rem;
+}
+
+.card__filters h5 {
+    color: var(--color-text-light);
+    padding: 0.5rem 2rem;
+    border: 1px solid var(--color-text-lighter);
+    border-radius: 1rem;
+}
+
+.card__filters h5.selected {
+    color: var(--color-text);
+    background: var(--color-primary);
+}
+
+.card__row {
+    display: flex;
+}
+
+.card__row > div {
+    flex: 1;
+    margin: 2rem auto;
+}
+
+.card__row:not(:last-child) {
+    border-bottom: 1px solid var(--color-text-lighter);
+}
+
+.card__row__text h1 {
+    font-size: 1.25rem;
+}
+
+.card__row__buttons {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.card__row__buttons a {
+    background: var(--color-text-lighter);
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.card__row__buttons img {
+    width: 1.5rem;
+}
+
+.card__row__buttons h5 {
+    padding: 0.5rem 2rem;
+    background: var(--color-primary);
+    border-radius: 1rem;
 }
 
 .form {

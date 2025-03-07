@@ -4,7 +4,7 @@ import { goto } from "$app/navigation";
 import { Camera, CameraResultType, CameraSource } from "@capacitor/camera";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const genAI = new GoogleGenerativeAI("AIzaSyCDUkLFDYk24JYdPgRWo-KfbAYzehtWpX0");
+const genAI = new GoogleGenerativeAI("AIzaSyADobf5_FldOe73uqlXYXaotxsQ28980RU");
 
 const baseUrl = "https://api.laddu.cc/api/v1";
 
@@ -134,7 +134,8 @@ function handleBackButton(fallbackUrl) {
         resultType: CameraResultType.Base64, // "Uri" returns the image URL
       });
 
-      await runAI(image.base64String);
+      const data = await foodAdd(image.base64String);
+      return(data)
     } catch (error) {
       alert(error);
     }
@@ -218,29 +219,54 @@ function handleBackButton(fallbackUrl) {
       }
   
       const arr = out.products;
-  
-      const data = arr.map(async (d) => {
-        const response = await fetch(`${baseUrl}/food`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: d.name,
-            quantity: Number(d.quantity),
-            lifespan: Number(d.lifespan),
-          }),
-        });
-        const res = await response.json();
-        if (!response.ok) {
-          alert(res.message);
-          console.log(res)
-        }
-        console.error(res);
-      });
+      
+      return arr;
+      // const data = arr.map(async (d) => {
+      //   const response = await fetch(`${baseUrl}/food`, {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify({
+      //       name: d.name,
+      //       quantity: Number(d.quantity),
+      //       lifespan: Number(d.lifespan),
+      //     }),
+      //   });
+      //   const res = await response.json();
+      //   if (!response.ok) {
+      //     alert(res.message);
+      //     console.log(res)
+      //   }
+      //   console.error(res);
+      // });
     } catch (error) {
       console.log(error);
     }
   }
+
+  async function foodAdd(base64) {
+    
+    const data = await runAI(base64)
+    if(!data){
+      return
+    }
+    const { value } = await Storage.get({ key: 'foodItems' });
+
+    console.log(JSON.stringify(value))
+    let arr = value? JSON.parse(value) : [];
+    console.log(arr.toString())
+    arr = arr.concat(data)
+    await Storage.set({
+      key: 'foodItems',
+      value: JSON.stringify(arr),
+    });
+    return arr;
+  }
   
-  export {handleBackButton, checkUser, logout, login, signup, takephoto}
+  async function getArr(){
+      const { value } = await Storage.get({ key: 'foodItems' });
+      return value || value == [] ? JSON.parse(value) : [];
+  }
+
+  export {handleBackButton, checkUser, logout, login, signup, takephoto, getArr}

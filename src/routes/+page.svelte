@@ -34,7 +34,7 @@
             </p>
         </div>
     </div>
-    <a href="/signup">
+    <a href="/login">
         <div class="btn--black btn--fixed">Get Started</div>
     </a>
 </main>

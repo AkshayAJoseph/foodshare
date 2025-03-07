@@ -90,4 +90,26 @@ function handleBackButton(fallbackUrl) {
     }
   }
 
-  export {handleBackButton, checkUser, logout, login}
+  async function signup(data) {
+    try {
+      console.log(data);
+      const response = await fetch(`${baseUrl}/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const res = await response.json();
+      if (!response.ok) {
+        alert(res.message);
+        return;
+      }
+      await setToken(res.token);
+      goto("/", { replaceState: true });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  export {handleBackButton, checkUser, logout, login, signup}

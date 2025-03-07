@@ -1,19 +1,25 @@
-# Project Name
+# FoodShare
 
 ## 🚀 Project Description
-A concise, engaging description of your hackathon project.
+A sustainability-driven platform that **reduces food waste** by enabling users to **list, buy, and donate near-expiry food items**. The app integrates **AI-powered expiry detection (Gemini Vision)**, **real-time updates (WebSockets)**, and **automated meal planning** to promote responsible consumption.
 
 ## 🎯 Link to Project
 [live link of project](live_link)
 
 ## 🛠 Tech Stack
-- List the primary technologies used
-- Include programming languages, frameworks, and key libraries
+| **Component**          | **Technology**                                                     |
+|------------------------|-------------------------------------------------------------------|
+| **Frontend**           | SvelteKit (Bundled with Capacitor for mobile)                     |
+| **Backend**            | Go (Cloud Server)                                                 |
+| **AI (Vision & Text)** | Gemini Vision API (Food Recognition, Expiry Extraction, Recipe Generation) |
+| **Database**           | PostgreSQL (NeonDB / Supabase)                                    |
+| **Real-Time Updates**  | WebSockets (Go + SvelteKit)                                      |
+| **Cloud Hosting**      | Backend (Cloud Server) + Frontend (Cloudflare)                   |
+| **Payment Gateway**    | Razorpay                                                         |
 
 ## 📦 Prerequisites
 - List all required software and versions
 - Include installation instructions
-- Example:
   ```
   - Node.js (v14+)
   - npm (v6+)
@@ -52,10 +58,11 @@ A concise, engaging description of your hackathon project.
    python app.py
    ```
 
-## Team Members
-  [1.Team Member 1](enter_github_id_here)   
-  [2.Team Member 2](enter_github_id_here)   
-  [3.Team Member 3](enter_github_id_here)   
-  [4.Team Member 4](enter_github_id_here)  
+## 👥 Team Members
+  [1. Akshay Joseph](enter_github_id_here)   
+  [2. Harinarayan M R](enter_github_id_here)   
+  [3. Sebastian Abraham](enter_github_id_here)   
+  [4. John K. Titus](enter_github_id_here)  
 
 **Made with ❤️ at Beachhack 6**
+

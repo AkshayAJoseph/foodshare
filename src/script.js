@@ -1,5 +1,6 @@
 import { Storage } from "@capacitor/storage";
 import { App } from "@capacitor/app";
+import { goto } from "$app/navigation";
 
 function handleBackButton(fallbackUrl) {
     if (typeof window !== "undefined" && typeof sessionStorage !== "undefined") {
@@ -20,3 +21,5 @@ function handleBackButton(fallbackUrl) {
     } else {
     }
   }
+
+  export {handleBackButton}

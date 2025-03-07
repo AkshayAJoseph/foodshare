@@ -5,6 +5,7 @@ import (
 
 	"github.com/foodshare/database"
 	"github.com/foodshare/models"
+	"github.com/foodshare/routes"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 )
@@ -28,6 +29,10 @@ func main() {
 	}
 
 	models.MigrateUser(db)
+	models.MigrateFood(db)
+
+	routes.UserRoutes(db, app)
+	routes.FoodRoutes(db, app)
 
 	app.Listen(":8080")
 }

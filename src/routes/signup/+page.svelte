@@ -1,11 +1,12 @@
 <script>
-  import { handleBackButton, login } from "../../script";
+  import { handleBackButton, signup } from "../../script";
   let email = $state("");
   let password = $state("");
-  handleBackButton("/");
+  let name = $state("");
+  handleBackButton("/login");
   const onclick = () => {
-    const data = { email, password };
-    login(data);
+    const data = { email, password, name };
+    signup(data);
   };
 </script>
 
@@ -14,7 +15,6 @@
 <input type="text" placeholder="hari@laddu.cc" bind:value={email} />
 <label>password</label>
 <input type="password" bind:value={password} />
-<button {onclick}>login</button>
-<a href="signup">
-  <button>signup</button>
-</a>
+<label>name</label>
+<input bind:value={name} />
+<button {onclick}>signup</button>

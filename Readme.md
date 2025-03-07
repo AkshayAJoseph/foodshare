@@ -10,11 +10,11 @@ A sustainability-driven platform that **reduces food waste** by enabling users t
 | **Component**          | **Technology**                                                     |
 |------------------------|-------------------------------------------------------------------|
 | **Frontend**           | SvelteKit (Bundled with Capacitor for mobile)                     |
-| **Backend**            | Go (Cloud Server)                                                 |
+| **Backend**            | Go (Backend Server)                                                 |
 | **AI (Vision & Text)** | Gemini Vision API (Food Recognition, Expiry Extraction, Recipe Generation) |
-| **Database**           | PostgreSQL (NeonDB / Supabase)                                    |
+| **Database**           | PostgreSQL                                    |
 | **Real-Time Updates**  | WebSockets (Go + SvelteKit)                                      |
-| **Cloud Hosting**      | Backend (Cloud Server) + Frontend (Cloudflare)                   |
+| **Security**           | Cloudflare                      |
 | **Payment Gateway**    | Razorpay                                                         |
 
 ## 📦 Prerequisites

@@ -8,7 +8,7 @@
 		"build": "vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
-		"and": "npm run build && npx cap sync && npx cap run android"
+		"and": "npm run build && npx cap sync"
 	},
 	"devDependencies": {
 		"@capacitor/cli": "^7.0.1",

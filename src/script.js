@@ -145,7 +145,7 @@ function handleBackButton(fallbackUrl) {
   async function runAI(base64) {
     try {
       const prompt =
-        "if the image has any products in it send only a json containing {name,quantity,lifespan} lifespan being an estimate of the food life in hours, the quantity being the number of servings of the product in the picture, of all unique products seen in the picture";
+        "if the image has any products in it send only a json containing {name,quantity,lifespan,category} lifespan being an estimate of the food life in hours, the quantity being the number of servings of the product in the picture, category being either 'veg' or 'non-veg', of all unique products seen in the picture";
       const model = genAI.getGenerativeModel({
         model: "gemini-1.5-pro",
         generationConfig: {
@@ -186,6 +186,7 @@ function handleBackButton(fallbackUrl) {
             name: out.name,
             quantity: Number(out.quantity),
             lifespan: Number(out.expiry),
+            category: out.category,
           }),
         });
         const res = await response.json();
@@ -273,7 +274,7 @@ function handleBackButton(fallbackUrl) {
   async function addfood(data) {
     try {
       console.log(data);
-      const response = await fetch(`${baseUrl}/register`, {
+      const response = await fetch(`${baseUrl}/food`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -300,6 +301,6 @@ function handleBackButton(fallbackUrl) {
     }
   }
 
-  
+
 
   export {handleBackButton, checkUser, logout, login, signup, takephoto, getArr, addfood, getCurrentlocation}

@@ -19,6 +19,10 @@
     items = await takephoto();
   };
 
+  const clear = async () => {
+    await Storage.remove({ key: "foodItems" });
+  };
+
   const handleSubmit = async (index) => {
     console.log("Submitting:", JSON.stringify(items[index]));
     addfood(items[index]);
@@ -54,8 +58,9 @@
     <input type="text" bind:value={item.category} />
     <label>Tags</label>
     <input type="text" bind:value={item.tags} />
-    <button on:click={() => handleSubmit(index)}>Submit</button>
+    <button onclick={() => handleSubmit(index)}>Submit</button>
   </div>
 {/each}
 
-<button on:click={addSection}>Add</button>
+<button onclick={addSection}>Add</button>
+<button onclick={clear}>clear</button>

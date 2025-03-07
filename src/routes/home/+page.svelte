@@ -52,6 +52,21 @@
                     </div>
                 </div>
             </div>
+
+            <div class="card card--green">
+                <div class="card__title">
+                    <h1>Contribute</h1>
+                </div>
+                <p>Offer surplus food to support community needs</p>
+                <div class="card__small">
+                    <a href="/camera" class="small">
+                        <img src="/aperture.svg" alt="" />
+                    </a>
+                    <a href="/manual" class="small">
+                        <img src="/arrow-small-up.svg" alt="" />
+                    </a>
+                </div>
+            </div>
             <div class="card">
                 <div class="card__title">
                     <h1>Expiring Soon</h1>
@@ -94,3 +109,9 @@
     {/if}
     <Navigation />
 </main>
+
+<style>
+    .card--green p {
+        width: 40%;
+    }
+</style>

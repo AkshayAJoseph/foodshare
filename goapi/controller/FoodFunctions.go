@@ -61,3 +61,21 @@ func GetIngredient(db *gorm.DB) func(*fiber.Ctx) error {
 		})
 	}
 }
+
+func GetIngredients(db *gorm.DB) fiber.Handler {
+	return func(c *fiber.Ctx) error {
+		foods := new([]models.Food)
+
+		err := db.Find(foods).Error
+		if err != nil {
+			return c.Status(500).JSON(fiber.Map{
+				"message": "Could not retrieve foods",
+				"error":   err.Error(),
+			})
+		}
+
+		return c.Status(200).JSON(fiber.Map{
+			"data": foods,
+		})
+	}
+}

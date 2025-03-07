@@ -58,8 +58,4 @@
 </main>
 
 <style>
-    main {
-        background: var(--color-primary);
-        min-height: 100vh;
-    }
 </style>

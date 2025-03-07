@@ -19,6 +19,14 @@
 }
 
 body {
+    background: linear-gradient(
+        180deg,
+        rgba(207, 255, 193, 1) 0%,
+        rgba(250, 250, 250, 1) 35%,
+        rgba(250, 250, 250, 1) 100%
+    );
+    background-repeat: no-repeat;
+
     font-family: "IBM Plex Sans";
 }
 

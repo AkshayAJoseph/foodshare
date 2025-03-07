@@ -24,7 +24,7 @@
     .bar {
         content: "";
         flex: 1;
-        background: var(--color-white-light);
+        background: #ffffff66;
         border-radius: 0.5rem;
         height: 0.5vh;
     }

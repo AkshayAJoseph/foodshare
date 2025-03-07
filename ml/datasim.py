@@ -21,3 +21,17 @@ data = {
 df = pd.DataFrame(data)
 df.to_csv("orders.csv", index=False)
 print("Synthetic data saved!")
+
+orders = pd.read_csv("orders.csv", parse_dates=["order_date", "expiry_date"])
+
+orders["days_to_expiry"] = (orders["expiry_date"] - orders["order_date"]).dt.days
+
+orders = pd.get_dummies(orders, columns=["food_category", "location"], drop_first=True)
+
+from sklearn.preprocessing import MinMaxScaler
+scaler = MinMaxScaler()
+orders[["quantity_available", "claimed_count", "temperature", "price"]] = scaler.fit_transform(
+    orders[["quantity_available", "claimed_count", "temperature", "price"]]
+)
+
+orders.to_csv("cleaned_orders.csv", index=False)

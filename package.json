@@ -25,6 +25,7 @@
 		"@capacitor/core": "^7.0.1",
 		"@capacitor/status-bar": "^7.0.0",
 		"@capacitor/storage": "^1.2.5",
+		"@google/generative-ai": "^0.24.0",
 		"@sveltejs/adapter-static": "^3.0.8"
 	}
 }

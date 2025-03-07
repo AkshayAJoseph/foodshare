@@ -2,7 +2,12 @@ import { Storage } from "@capacitor/storage";
 import { App } from "@capacitor/app";
 import { goto } from "$app/navigation";
 import { Camera, CameraResultType, CameraSource } from "@capacitor/camera";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+const genAI = new GoogleGenerativeAI("AIzaSyCDUkLFDYk24JYdPgRWo-KfbAYzehtWpX0");
+
 const baseUrl = "https://api.laddu.cc/api/v1";
+
 
 async function setToken(token) {
   await Storage.set({
@@ -164,11 +169,11 @@ function handleBackButton(fallbackUrl) {
         ...imageParts,
       ]);
   
-      console.log("t4");
+      console.log({string: "hi"});
   
       const output = generatedContent.response.text();
       const out = JSON.parse(output);
-      console.log(out);
+      console.log(JSON.stringify(out));
       if (!out.products) {
         const response = await fetch(`${baseUrl}/food`, {
           method: "POST",
@@ -222,15 +227,16 @@ function handleBackButton(fallbackUrl) {
           },
           body: JSON.stringify({
             name: d.name,
-            quantity: d.quantity,
-            lifespan: d.lifespan,
+            quantity: Number(d.quantity),
+            lifespan: Number(d.lifespan),
           }),
         });
         const res = await response.json();
         if (!response.ok) {
           alert(res.message);
+          console.log(res)
         }
-        console.log(res);
+        console.error(res);
       });
     } catch (error) {
       console.log(error);

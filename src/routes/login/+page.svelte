@@ -16,7 +16,7 @@
 </script>
 
 <main>
-    <Progress order="1" />
+    <Progress order="2" />
     <Header h1="Log in" h5="Personal Details" />
     <div class="box">
         <div class="card">
@@ -43,9 +43,14 @@
                             required
                         />
                     </div>
-                    <a href="/home" {onclick}>
-                        <div class="btn--black">Register</div>
-                    </a>
+                    <div class="flex">
+                        <a href="/signup">
+                            <div class="btn--black btn--outline">Register</div>
+                        </a>
+                        <a {onclick}>
+                            <div class="btn--black">Log In</div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -53,4 +58,10 @@
 </main>
 
 <style>
+    .flex {
+        justify-content: space-between;
+    }
+    .flex > a {
+        flex: 1;
+    }
 </style>

@@ -41,6 +41,10 @@ a {
     text-decoration: none;
 }
 
+p {
+    font-size: 0.8rem;
+}
+
 .flex {
     display: flex;
     gap: 1rem;
@@ -81,6 +85,9 @@ p {
     padding: 1.5rem;
     border-radius: 1rem;
     margin: 2rem auto;
+    transform: scale(0.98); /* Very slight scale down initially */
+    animation: fadeIn 1.5s cubic-bezier(0.19, 1, 0.22, 1) forwards; /* Soft ease */
+    opacity: 0;
 }
 
 .card--green {
@@ -114,7 +121,7 @@ p {
 }
 
 .card__filters h5 {
-    font-size: 0.75rem;
+    font-size: 0.55rem;
     color: var(--color-text-light);
     padding: 0.5rem 2rem;
     border: 1px solid var(--color-text-lighter);
@@ -150,7 +157,7 @@ p {
 }
 
 .card__row__buttons h5 {
-    font-size: 0.75rem;
+    font-size: 0.55rem;
 }
 .card__row__buttons a {
     background: var(--color-text-lighter);
@@ -162,6 +169,8 @@ p {
 
 .card__row__buttons img {
     width: 1.5rem;
+    filter: invert(71%) sepia(5%) saturate(0%) hue-rotate(74deg) brightness(98%)
+        contrast(91%);
 }
 
 .card__row__buttons h5 {
@@ -212,6 +221,12 @@ p {
     width: calc(100vw - 4rem);
 }
 
+.btn--outline {
+    border: 1px solid var(--color-text-light) !important;
+    background: var(--color-white-light) !important;
+    color: var(--color-text-light) !important;
+}
+
 .card__small {
     display: flex;
     justify-content: end;
@@ -230,4 +245,32 @@ a.small {
 a.small img {
     width: 20px;
     height: 20px;
+    filter: invert(71%) sepia(5%) saturate(0%) hue-rotate(74deg) brightness(98%)
+        contrast(91%);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.card:nth-child(1) {
+    animation-delay: 0.2s;
+}
+.card:nth-child(2) {
+    animation-delay: 0.4s;
+}
+.card:nth-child(3) {
+    animation-delay: 0.6s;
+}
+.card:nth-child(4) {
+    animation-delay: 0.8s;
+}
+.card:nth-child(5) {
+    animation-delay: 1s;
 }

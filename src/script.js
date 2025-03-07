@@ -1,6 +1,7 @@
 import { Storage } from "@capacitor/storage";
 import { App } from "@capacitor/app";
 import { goto } from "$app/navigation";
+import { Camera, CameraResultType, CameraSource } from "@capacitor/camera";
 const baseUrl = "https://api.laddu.cc/api/v1";
 
 async function setToken(token) {
@@ -120,4 +121,18 @@ function handleBackButton(fallbackUrl) {
     }
   }
 
-  export {handleBackButton, checkUser, logout, login, signup}
+  async function takephoto() {
+    try {
+      const image = await Camera.getPhoto({
+        quality: 40,
+        source: CameraSource.Camera, // Use "CameraSource.Photos" for gallery
+        resultType: CameraResultType.Base64, // "Uri" returns the image URL
+      });
+
+      console.log(image.base64String);
+    } catch (error) {
+      alert(error);
+    }
+  }
+
+  export {handleBackButton, checkUser, logout, login, signup, takephoto}

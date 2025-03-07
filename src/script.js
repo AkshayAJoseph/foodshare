@@ -22,4 +22,40 @@ function handleBackButton(fallbackUrl) {
     }
   }
 
-  export {handleBackButton}
+  async function checkUser() {
+    const { value } = await Storage.get({ key: "token" });
+    console.log(value);
+    if (!value) {
+      goto("login", { replaceState: true });
+      return;
+    }
+    const response = await fetch(`${baseUrl}/verify`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${value}`,
+      },
+    });
+    const res = await response.json();
+    if (!response.ok) {
+      alert(res.message);
+      await logout();
+      goto("/login", { replaceState: true });
+      return;
+    }
+    const id = res.id;
+    const response2 = await fetch(`${baseUrl}/users/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const res2 = await response2.json();
+    if (!response2.ok) {
+      alert(res2.message);
+      return;
+    }
+    return res2.data;
+  }
+
+  export {handleBackButton, checkUser}

@@ -269,4 +269,25 @@ function handleBackButton(fallbackUrl) {
       return value || value == [] ? JSON.parse(value) : [];
   }
 
-  export {handleBackButton, checkUser, logout, login, signup, takephoto, getArr}
+  async function addfood(data) {
+    try {
+      console.log(data);
+      const response = await fetch(`${baseUrl}/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const res = await response.json();
+      if (!response.ok) {
+        alert(res.message);
+        return;
+      }
+      alert('added successfuly')
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  export {handleBackButton, checkUser, logout, login, signup, takephoto, getArr, addfood}

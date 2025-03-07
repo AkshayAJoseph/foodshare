@@ -1,7 +1,13 @@
 <script>
   import { Storage } from "@capacitor/storage";
   import { onMount } from "svelte";
-  import { getArr, handleBackButton, login, takephoto } from "../../script";
+  import {
+    addfood,
+    getArr,
+    handleBackButton,
+    login,
+    takephoto,
+  } from "../../script";
 
   let items = [];
 
@@ -15,6 +21,7 @@
 
   const handleSubmit = async (index) => {
     console.log("Submitting:", JSON.stringify(items[index]));
+    addfood(items[index]);
     console.log(index);
     if (items.length == 1) {
       items = [];

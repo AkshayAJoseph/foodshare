@@ -58,4 +58,13 @@ function handleBackButton(fallbackUrl) {
     return res2.data;
   }
 
+  async function logout() {
+    try {
+      await Storage.remove({ key: "token" });
+      goto("/login", { replaceState: true });
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+
   export {handleBackButton, checkUser}

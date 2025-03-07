@@ -28,29 +28,27 @@
             </div>
             <div class="form">
                 <div class="form__row">
-                    <div class="form__row">
-                        <label>Are you an</label>
-                        <div class="flex">
-                            <div class="form__option">
-                                <h5>Individual</h5>
-                            </div>
-                            <div class="form__option">
-                                <h5>Organization</h5>
-                            </div>
+                    <label>Are you an</label>
+                    <div class="flex">
+                        <div class="form__option">
+                            <h5>Individual</h5>
+                        </div>
+                        <div class="form__option">
+                            <h5>Organization</h5>
                         </div>
                     </div>
-                    <div class="form__row">
-                        <label>District</label>
-                        <input
-                            bind:value={password}
-                            placeholder="Thrissur"
-                            required
-                        />
-                    </div>
-                    <a href="/home" {onclick}>
-                        <div class="btn--black">Register</div>
-                    </a>
                 </div>
+                <div class="form__row">
+                    <label>District</label>
+                    <input
+                        bind:value={password}
+                        placeholder="Thrissur"
+                        required
+                    />
+                </div>
+                <a href="/home" {onclick}>
+                    <div class="btn--black">Register</div>
+                </a>
             </div>
         </div>
     </div>

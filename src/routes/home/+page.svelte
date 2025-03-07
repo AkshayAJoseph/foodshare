@@ -59,10 +59,10 @@
                 </div>
                 <p>Offer surplus food to support community needs</p>
                 <div class="card__small">
-                    <a href="/camera" class="small">
+                    <a onclick={capture} class="small">
                         <img src="/aperture.svg" alt="" />
                     </a>
-                    <a href="/manual" class="small">
+                    <a href="/upload" class="small">
                         <img src="/arrow-small-up.svg" alt="" />
                     </a>
                 </div>
@@ -105,7 +105,6 @@
         </div>
         <button onclick={logout}>logout</button>
         <br />
-        <button {capture}>add item</button>
     {/if}
     <Navigation />
 </main>

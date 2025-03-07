@@ -30,7 +30,7 @@ func CreateFood(db *gorm.DB) func(*fiber.Ctx) error {
 		}
 
 		return c.Status(201).JSON(fiber.Map{
-			"message": "Recipe created",
+			"message": "Food	 created",
 			"data":    food,
 		})
 	}

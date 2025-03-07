@@ -8,7 +8,7 @@
 		"build": "vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
-		"and": "npm run build && npx cap sync && npx cap run android"
+		"and": "npm run build && npx cap sync"
 	},
 	"devDependencies": {
 		"@capacitor/cli": "^7.0.1",
@@ -23,6 +23,7 @@
 		"@capacitor/app": "^7.0.0",
 		"@capacitor/camera": "^7.0.0",
 		"@capacitor/core": "^7.0.1",
+		"@capacitor/geolocation": "^7.1.1",
 		"@capacitor/status-bar": "^7.0.0",
 		"@capacitor/storage": "^1.2.5",
 		"@google/generative-ai": "^0.24.0",

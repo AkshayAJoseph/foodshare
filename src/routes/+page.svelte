@@ -34,7 +34,7 @@
             </p>
         </div>
     </div>
-    <a href="/login">
+    <a href="/add-food">
         <div class="btn--black btn--fixed">Get Started</div>
     </a>
 </main>

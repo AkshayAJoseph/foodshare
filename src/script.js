@@ -3,6 +3,13 @@ import { App } from "@capacitor/app";
 import { goto } from "$app/navigation";
 const baseUrl = "https://api.laddu.cc/api/v1";
 
+async function setToken(token) {
+  await Storage.set({
+    key: "token",
+    value: token,
+  });
+}
+
 function handleBackButton(fallbackUrl) {
     if (typeof window !== "undefined" && typeof sessionStorage !== "undefined") {
       sessionStorage.setItem("fallbackPage", fallbackUrl);

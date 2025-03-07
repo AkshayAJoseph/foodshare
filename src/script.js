@@ -3,6 +3,7 @@ import { App } from "@capacitor/app";
 import { goto } from "$app/navigation";
 import { Camera, CameraResultType, CameraSource } from "@capacitor/camera";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { Geolocation } from '@capacitor/geolocation';
 
 const genAI = new GoogleGenerativeAI("AIzaSyADobf5_FldOe73uqlXYXaotxsQ28980RU");
 
@@ -290,4 +291,15 @@ function handleBackButton(fallbackUrl) {
     }
   }
 
-  export {handleBackButton, checkUser, logout, login, signup, takephoto, getArr, addfood}
+  async function getCurrentlocation() {
+    try {
+      const coordinates = await Geolocation.getCurrentPosition();
+      return coordinates.coords;
+    } catch (error) {
+      console.error("Error getting location:", error);
+    }
+  }
+
+  
+
+  export {handleBackButton, checkUser, logout, login, signup, takephoto, getArr, addfood, getCurrentlocation}

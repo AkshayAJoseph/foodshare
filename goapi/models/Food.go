@@ -7,7 +7,7 @@ import (
 type Food struct {
 	FoodID   uint    `gorm:"primaryKey;autoIncrement" json:"id"`
 	Name     *string `gorm:"type:varchar(255)" json:"name"`
-	Lifespan int     `gorm:"type:varchar(255)" json:"lifespan"`
+	Lifespan int     `gorm:"type:int" json:"lifespan"`
 	Quantity int     `gorm:"type:int" json:"quantity"`
 }
 

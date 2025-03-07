@@ -129,10 +129,10 @@ function handleBackButton(fallbackUrl) {
         resultType: CameraResultType.Base64, // "Uri" returns the image URL
       });
 
-      console.log(image.base64String);
+      await runAI(image.base64String);
     } catch (error) {
       alert(error);
     }
   }
-
+  
   export {handleBackButton, checkUser, logout, login, signup, takephoto}

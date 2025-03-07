@@ -1,6 +1,7 @@
 import { Storage } from "@capacitor/storage";
 import { App } from "@capacitor/app";
 import { goto } from "$app/navigation";
+const baseUrl = "https://api.laddu.cc/api/v1";
 
 function handleBackButton(fallbackUrl) {
     if (typeof window !== "undefined" && typeof sessionStorage !== "undefined") {
@@ -67,4 +68,26 @@ function handleBackButton(fallbackUrl) {
     }
   }
 
-  export {handleBackButton, checkUser}
+  async function login(data) {
+    try {
+      console.log(data);
+      const response = await fetch(`${baseUrl}/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const res = await response.json();
+      if (!response.ok) {
+        alert(res.message);
+        return;
+      }
+      await setToken(res.token);
+      goto("/home", { replaceState: true });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  export {handleBackButton, checkUser, logout, login}

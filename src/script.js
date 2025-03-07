@@ -4,6 +4,7 @@ import { goto } from "$app/navigation";
 import { Camera, CameraResultType, CameraSource } from "@capacitor/camera";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { onMount } from 'svelte';
+import { Geolocation } from "@capacitor/geolocation";
   let location;
 
 
@@ -283,6 +284,52 @@ function handleBackButton(fallbackUrl) {
     }
   }
 
+  async function getfoods() {
+    try {
+      
+      const response = await fetch(`${baseUrl}/foods`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        }
+      });
+      const res = await response.json();
+      if (!response.ok) {
+        alert(res.message);
+        return;
+      }
+      return res.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function getCoords() {
+    const data = await Geolocation.getCurrentPosition();
+    return data.coords;
+    
+  }
+
+  function getDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371000; // Radius of Earth in meters
+    const toRad = (degree) => (degree * Math.PI) / 180; // Convert degrees to radians
+
+    const dLat = toRad(lat2 - lat1);
+    const dLon = toRad(lon2 - lon1);
+
+    const a = 
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+    return R * c; // Distance in meters
+}
+
+// Example Usage:
+const distance = getDistance(12.9716, 77.5946, 13.0827, 80.2707);
+console.log(`Distance: ${distance.toFixed(2)} meters`);
 
 
-  export {handleBackButton, checkUser, logout, login, signup, takephoto, getArr, addfood}
+  export {handleBackButton, checkUser, logout, login, signup, takephoto, getArr, addfood, getfoods, getCoords, getDistance}

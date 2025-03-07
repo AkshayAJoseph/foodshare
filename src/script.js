@@ -259,9 +259,9 @@ function handleBackButton(fallbackUrl) {
       return value || value == [] ? JSON.parse(value) : [];
   }
 
-  async function addfood(data) {
+  async function addfood(data,longitude,latitude) {
     try {
-      const { longitude, latitude } = await getCurrentlocation();
+      
       data.longitude = longitude;
       data.latitude = latitude;
       console.log(data);

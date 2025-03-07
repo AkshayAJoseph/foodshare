@@ -1,6 +1,7 @@
 <script>
   import { Storage } from "@capacitor/storage";
   import { onMount } from "svelte";
+  import { Geolocation } from "@capacitor/geolocation";
   import {
     addfood,
     getArr,
@@ -25,8 +26,11 @@
   };
 
   const handleSubmit = async (index) => {
+    const data = await Geolocation.getCurrentPosition();
+    const { latitude, longitude } = data.coords;
+    console.log(data);
     console.log("Submitting:", JSON.stringify(items[index]));
-    addfood(items[index]);
+    addfood(items[index], longitude, latitude);
     console.log(index);
     if (items.length == 1) {
       items = [];
@@ -63,5 +67,6 @@
   </div>
 {/each}
 
+<br />
 <button onclick={addSection}>Add</button>
 <button onclick={clear}>clear</button>

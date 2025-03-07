@@ -63,6 +63,7 @@ function handleBackButton(fallbackUrl) {
       alert(res2.message);
       return;
     }
+    console.log('done')
     return res2.data;
   }
 

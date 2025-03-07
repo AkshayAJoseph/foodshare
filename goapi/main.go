@@ -29,8 +29,10 @@ func main() {
 	}
 
 	models.MigrateUser(db)
+	models.MigrateFood(db)
 
 	routes.UserRoutes(db, app)
+	routes.FoodRoutes(db, app)
 
 	app.Listen(":8080")
 }

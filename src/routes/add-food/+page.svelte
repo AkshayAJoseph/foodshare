@@ -17,6 +17,7 @@
 
   const addSection = async () => {
     items = await takephoto();
+    console.log(items);
   };
 
   const clear = async () => {

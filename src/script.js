@@ -3,7 +3,9 @@ import { App } from "@capacitor/app";
 import { goto } from "$app/navigation";
 import { Camera, CameraResultType, CameraSource } from "@capacitor/camera";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { Geolocation } from '@capacitor/geolocation';
+import { onMount } from 'svelte';
+  let location;
+
 
 const genAI = new GoogleGenerativeAI("AIzaSyADobf5_FldOe73uqlXYXaotxsQ28980RU");
 
@@ -177,18 +179,6 @@ function handleBackButton(fallbackUrl) {
       const out = JSON.parse(output);
       console.log(JSON.stringify(out));
       if (!out.products) {
-        const response = await fetch(`${baseUrl}/food`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: out.name,
-            quantity: Number(out.quantity),
-            lifespan: Number(out.expiry),
-            category: out.category,
-          }),
-        });
         const res = await response.json();
         if (!response.ok) {
           console.log(res);
@@ -255,9 +245,7 @@ function handleBackButton(fallbackUrl) {
     }
     const { value } = await Storage.get({ key: 'foodItems' });
 
-    console.log(JSON.stringify(value))
     let arr = value? JSON.parse(value) : [];
-    console.log(arr.toString())
     arr = arr.concat(data)
     await Storage.set({
       key: 'foodItems',
@@ -273,6 +261,9 @@ function handleBackButton(fallbackUrl) {
 
   async function addfood(data) {
     try {
+      const { longitude, latitude } = await getCurrentlocation();
+      data.longitude = longitude;
+      data.latitude = latitude;
       console.log(data);
       const response = await fetch(`${baseUrl}/food`, {
         method: "POST",
@@ -292,15 +283,6 @@ function handleBackButton(fallbackUrl) {
     }
   }
 
-  async function getCurrentlocation() {
-    try {
-      const coordinates = await Geolocation.getCurrentPosition();
-      return coordinates.coords;
-    } catch (error) {
-      console.error("Error getting location:", error);
-    }
-  }
 
 
-
-  export {handleBackButton, checkUser, logout, login, signup, takephoto, getArr, addfood, getCurrentlocation}
+  export {handleBackButton, checkUser, logout, login, signup, takephoto, getArr, addfood}

@@ -36,7 +36,7 @@ func CreateFood(db *gorm.DB) func(*fiber.Ctx) error {
 	}
 }
 
-func GetIngredient(db *gorm.DB) func(*fiber.Ctx) error {
+func GetFood(db *gorm.DB) func(*fiber.Ctx) error {
 	return func(c *fiber.Ctx) error {
 		id := c.Params("id")
 
@@ -62,7 +62,7 @@ func GetIngredient(db *gorm.DB) func(*fiber.Ctx) error {
 	}
 }
 
-func GetIngredients(db *gorm.DB) fiber.Handler {
+func GetFoods(db *gorm.DB) fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		foods := new([]models.Food)
 

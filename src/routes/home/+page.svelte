@@ -15,6 +15,7 @@
         if (data) {
             loading = false;
         }
+        console.log(data);
     };
 
     onMount(() => {
@@ -32,6 +33,7 @@
 
     const fetchExpiringFoods = async () => {
         expiringFoods = await getfoods();
+        console.log(expiringFoods);
         expiringFoods.sort((a, b) => a.hours - b.hours);
         expiringLoading = false;
     };
@@ -73,7 +75,7 @@
                 </div>
                 <p>Offer surplus food to support community needs</p>
                 <div class="card__small">
-                    <a onclick={capture} class="small">
+                    <a href="/shutter" class="small">
                         <img src="/aperture.svg" alt="" />
                     </a>
                     <a href="/upload" class="small">

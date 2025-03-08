@@ -1,7 +1,8 @@
 <script>
     import { getfoods } from "../../script";
     import { onMount } from "svelte";
-
+    import Navigation from "$lib/Navigation.svelte";
+    import Header from "$lib/Header.svelte";
     let data = [];
     let loading = true;
 
@@ -18,6 +19,7 @@
 </script>
 
 <main>
+    <Header h1="About to Expire" h5="Get it Fast!" />
     <div class="box">
         {#if loading}
             <p>loading</p>

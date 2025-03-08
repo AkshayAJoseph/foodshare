@@ -16,12 +16,14 @@
         <a href="/stats" class="small" class:active={isActive("/stats")}>
             <img src="/plant-growth.svg" alt="" />
         </a>
+        <!-- --
         <a href="/settings" class="small" class:active={isActive("/settings")}>
             <img src="/settings.svg" alt="" />
         </a>
         <a class="small" class:active={isActive("/connect")}>
             <img src="/circle-nodes.svg" alt="" />
         </a>
+        -->
     </div>
 </main>
 

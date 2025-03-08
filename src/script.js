@@ -327,9 +327,5 @@ function handleBackButton(fallbackUrl) {
     return R * c; // Distance in meters
 }
 
-// Example Usage:
-const distance = getDistance(12.9716, 77.5946, 13.0827, 80.2707);
-console.log(`Distance: ${distance.toFixed(2)} meters`);
-
 
   export {handleBackButton, checkUser, logout, login, signup, takephoto, getArr, addfood, getfoods, getCoords, getDistance}

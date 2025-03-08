@@ -1,13 +1,8 @@
 <script>
     import { onMount } from "svelte";
     import { checkUser, logout } from "../../script";
-    import { takephoto } from "../../script";
     let data;
     let loading = true;
-
-    const capture = async () => {
-        await takephoto();
-    };
 
     const doCheck = async () => {
         data = await checkUser();

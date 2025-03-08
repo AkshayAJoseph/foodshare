@@ -4,10 +4,9 @@
     import { takephoto } from "../../script";
     let data;
     let loading = true;
+    let photoData = [];
 
-    const capture = async () => {
-        await takephoto();
-    };
+    const getArr = () => {};
 
     const doCheck = async () => {
         data = await checkUser();
@@ -18,6 +17,7 @@
 
     onMount(() => {
         doCheck();
+        console.log(photoData);
     });
 
     import Header from "$lib/Header.svelte";

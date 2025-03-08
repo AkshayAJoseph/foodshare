@@ -4,8 +4,6 @@
     let currentPath = location.pathname;
 
     function isActive(path) {
-        console.log(`current path is ${currentPath}`);
-        console.log(`path is ${path}`);
         return currentPath == path;
     }
 </script>

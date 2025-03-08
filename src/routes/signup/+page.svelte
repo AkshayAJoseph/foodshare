@@ -90,6 +90,6 @@
         cursor: pointer;
     }
     .form__option.selected {
-        border: 2px solid green;
+        border: 1px solid var(--color-text-light);
     }
 </style>

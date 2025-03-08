@@ -180,71 +180,13 @@ function handleBackButton(fallbackUrl) {
       const out = JSON.parse(output);
       console.log(JSON.stringify(out));
       if (!out.products) {
-        const response = await fetch(`${baseUrl}/food`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: out.name,
-            quantity: Number(out.quantity),
-            lifespan: Number(out.expiry),
-            category: out.category,
-          }),
-        });
-        const res = await response.json();
-        if (!response.ok) {
-          console.log(res);
-          return;
-        }
-        // console.log(res);
-        // const userdata = await checkUser();
-        // const userid = userdata.id;
-        // const id = res.data.id;
-        // const response3 = await fetch(`${baseUrl}/ingredient/${userid}`, {
-        //   method: "PUT",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        //   body: JSON.stringify({
-        //     ingid: id,
-        //   }),
-        // });
-  
-        // const res3 = await response3.json();
-        // if (!response3.ok) {
-        //   alert(res3.message);
-        //   return;
-        // }
-        // console.log(res3);
-  
-        // alert("Product added");
-        console.log(res)
-        return;
+       
+          return out;
       }
   
       const arr = out.products;
       
       return arr;
-      // const data = arr.map(async (d) => {
-      //   const response = await fetch(`${baseUrl}/food`, {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify({
-      //       name: d.name,
-      //       quantity: Number(d.quantity),
-      //       lifespan: Number(d.lifespan),
-      //     }),
-      //   });
-      //   const res = await response.json();
-      //   if (!response.ok) {
-      //     alert(res.message);
-      //     console.log(res)
-      //   }
-      //   console.error(res);
-      // });
     } catch (error) {
       console.log(error);
     }

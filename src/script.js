@@ -180,6 +180,18 @@ function handleBackButton(fallbackUrl) {
       const out = JSON.parse(output);
       console.log(JSON.stringify(out));
       if (!out.products) {
+        const response = await fetch(`${baseUrl}/food`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: out.name,
+            quantity: Number(out.quantity),
+            lifespan: Number(out.expiry),
+            category: out.category,
+          }),
+        });
         const res = await response.json();
         if (!response.ok) {
           console.log(res);
@@ -237,6 +249,7 @@ function handleBackButton(fallbackUrl) {
       console.log(error);
     }
   }
+
 
   async function foodAdd(base64) {
     

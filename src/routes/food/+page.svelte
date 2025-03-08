@@ -1,15 +1,8 @@
-<script>
-    import RazerPay from "$lib/RazerPay.svelte";
-</script>
-
-<main>
-    <div class="box">
-        <div class="card">
-            <div class="card__title">
-                <h1>Claim Food</h1>
-            </div>
-
-            <RazerPay />
-        </div>
-    </div>
-</main>
+<form>
+    <script
+        src="https://checkout.razorpay.com/v1/payment-button.js"
+        data-payment_button_id="pl_Q48oiTadl2HkUq"
+        async
+    >
+    </script>
+</form>

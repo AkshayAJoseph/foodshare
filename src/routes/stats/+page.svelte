@@ -1,60 +1,54 @@
 <script>
-    import { getfoods } from "../../script";
     import { onMount } from "svelte";
-    import Header from "$lib/Header.svelte";
-    import Navigation from "$lib/Navigation.svelte";
-
-    let data = [];
+    import { checkUser, logout } from "../../script";
+    let data;
     let loading = true;
 
-    const doFetch = async () => {
-        data = await getfoods();
-        data.sort((a, b) => a.hours - b.hours);
-
-        loading = false;
+    const doCheck = async () => {
+        data = await checkUser();
+        if (data) {
+            loading = false;
+        }
     };
 
     onMount(() => {
-        doFetch();
+        doCheck();
     });
+
+    import Header from "$lib/Header.svelte";
+    import Navigation from "$lib/Navigation.svelte";
 </script>
 
 <main>
-    <Header h1="All Items" h5="Ranked by Expiry" />
-    <Navigation />
-    <div class="box">
-        {#if loading}
-            <p>loading</p>
-        {:else}
+    {#if loading}
+        <p>Loading...</p>
+    {:else}
+        <Header h1="Welcome," h5={data.name} />
+        <div class="box">
             <div class="card">
                 <div class="card__title">
                     <h1>Expiring Soon</h1>
                 </div>
-
-                {#each data as item}
-                    <div class="card__row">
-                        <div class="card__row__text">
-                            <h1>{item.name}</h1>
-                            <p>{item.lifespan} hours</p>
-                        </div>
-                        <div class="card__row__buttons">
-                            <h5>{item.tags || item.quantity}</h5>
-                            <a href="/food">
-                                <img src="/eye.svg" alt="" />
-                            </a>
-                        </div>
+                <div class="card__filters">
+                    <h5 class="selected">VEG</h5>
+                    <h5>Under 0KM</h5>
+                    <h5>Under 5KM</h5>
+                </div>
+                <div class="card__row">
+                    <div class="card__row__text">
+                        <h1>Sambar, Rice</h1>
+                        <p>200m</p>
                     </div>
-                {/each}
+                    <div class="card__row__buttons">
+                        <h5>TAGS</h5>
+                        <a href="/food">
+                            <img src="/eye.svg" alt="" />
+                        </a>
+                    </div>
+                </div>
             </div>
-        {/if}
-    </div>
+        </div>
+        <br />
+    {/if}
+    <Navigation />
 </main>
-
-<style>
-    .form__option {
-        cursor: pointer;
-    }
-    .form__option.selected {
-        border: 2px solid green;
-    }
-</style>

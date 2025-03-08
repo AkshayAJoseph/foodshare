@@ -1,13 +1,8 @@
 <script>
     import { onMount } from "svelte";
     import { checkUser, logout } from "../../script";
-    import { takephoto } from "../../script";
     let data;
     let loading = true;
-
-    const capture = async () => {
-        await takephoto();
-    };
 
     const doCheck = async () => {
         data = await checkUser();
@@ -32,7 +27,7 @@
         <div class="box">
             <div class="card">
                 <div class="card__title">
-                    <h1>Nearby Contributions</h1>
+                    <h1>Expiring Soon</h1>
                 </div>
                 <div class="card__filters">
                     <h5 class="selected">VEG</h5>

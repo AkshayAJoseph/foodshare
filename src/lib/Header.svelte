@@ -20,7 +20,7 @@
 
 <style>
     .box {
-        margin: 2rem auto;
+        margin: 2rem;
         display: flex;
     }
     .box__text {
@@ -30,9 +30,8 @@
         margin-right: 1rem;
     }
     h1 {
-        margin-bottom: 0.5rem;
     }
     h5 {
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
 </style>

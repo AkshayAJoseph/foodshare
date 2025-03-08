@@ -32,12 +32,14 @@
             <div class="card">
                 <div class="card__title">
                     <h1>Nearby Contributions</h1>
-                    <h5>See All</h5>
+                    <a href="/nearby">
+                        <h5>See All</h5>
+                    </a>
                 </div>
                 <div class="card__filters">
-                    <h5 class="selected">VEG</h5>
-                    <h5>Under 0KM</h5>
-                    <h5>Under 5KM</h5>
+                    <h5 class="selected">Veg</h5>
+                    <h5>10KM</h5>
+                    <h5>5KM</h5>
                 </div>
                 <div class="card__row">
                     <div class="card__row__text">
@@ -70,7 +72,9 @@
             <div class="card">
                 <div class="card__title">
                     <h1>Expiring Soon</h1>
-                    <h5>See All</h5>
+                    <a href="/expiring">
+                        <h5>See All</h5>
+                    </a>
                 </div>
                 <div class="card__filters">
                     <h5 class="selected">2 Hours</h5>

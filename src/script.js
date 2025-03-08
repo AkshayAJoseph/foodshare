@@ -310,4 +310,31 @@ export const initPushNotifications = () => {
   });
 };
 
-  export {handleBackButton, checkUser, logout, login, signup, takephoto, getArr, addfood, getfoods, getCoords, getDistance}
+function mapsLink(latitude, longitude) {
+  if (typeof latitude !== "number" || typeof longitude !== "number") {
+      throw new Error("Latitude and longitude must be numbers.");
+  }
+  return `https://www.google.com/maps?q=${latitude},${longitude}`;
+}
+
+async function getfood(id) {
+  try {
+    
+    const response = await fetch(`${baseUrl}/food/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    });
+    const res = await response.json();
+    if (!response.ok) {
+      alert(res.message);
+      return;
+    }
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+  export {handleBackButton, checkUser, logout, login, signup, takephoto, getArr, addfood, getfoods, getCoords, getDistance, mapsLink, getfood}

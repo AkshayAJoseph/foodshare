@@ -51,8 +51,7 @@ class OrganizationBase(BaseModel):
     state: str
     zip_code: str
     location: Coordinates
-    org_type: str = Field(..., regex="^(shelter|food_bank|community_center|school|other)$")
-    capacity_kg: float = Field(..., gt=0)
+    org_type: str = Field(..., pattern=r"^(shelter|food_bank|community_center|school|other)$")    capacity_kg: float = Field(..., gt=0)
     operating_hours: Dict[str, str]  # {"monday": "9am-5pm", ...}
     storage_options: Dict[str, bool] = {
         "refrigeration": False,

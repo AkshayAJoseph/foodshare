@@ -21,7 +21,7 @@
         <a href="/settings" class="small" class:active={isActive("/settings")}>
             <img src="/settings.svg" alt="" />
         </a>
-        <a href="/connect" class="small" class:active={isActive("/connect")}>
+        <a class="small" class:active={isActive("/connect")}>
             <img src="/circle-nodes.svg" alt="" />
         </a>
     </div>

@@ -14,16 +14,15 @@
         await takephoto();
     };
 
-    const doCheck = async () => {
-        data = await checkUser();
-        if (data) {
-            loading = false;
-        }
-    };
+  async function fetchData() {
+    items = await getArr();
+    loading = false;
+  }
 
     onMount(() => {
         doCheck();
     });
+  };
 
     import Header from "$lib/Header.svelte";
     import Navigation from "$lib/Navigation.svelte";
@@ -108,10 +107,58 @@
                     </div>
                 </div>
             </div>
+            <div class="form__row">
+              <label>Category</label>
+              <div class="flex">
+                <div class="form__option">
+                  <h5>Veg</h5>
+                </div>
+                <div class="form__option">
+                  <h5>Non Veg</h5>
+                </div>
+              </div>
+            </div>
+            <div class="form__row">
+              <label>Lifespan</label>
+              <input
+                placeholder="60Hours"
+                bind:value={item.lifespan}
+                required
+              />
+            </div>
+            <div class="form__row">
+              <label>Count</label>
+              <input placeholder="3" required bind:value={item.quantity} />
+            </div>
+            <div class="form__row">
+              <label>Category</label>
+              <input placeholder="VEG" bind:value={item.category} required />
+            </div>
+            <div class="form__row">
+              <label>Tags</label>
+              <input placeholder="FRESH" bind:value={item.tags} required />
+            </div>
+            <a href="/home">
+              <div
+                class="btn--black"
+                onclick={() => {
+                  handleSubmit(index);
+                }}
+              >
+                Contribute
+              </div>
+            </a>
+          </div>
         </div>
-        <br />
-    {/if}
-    <Navigation />
+      </div>
+      <br />
+    {/each}
+  {/if}
+
+  <br />
+  <button onclick={addSection}>Add</button>
+  <button onclick={clear}>clear</button>
+  <Navigation />
 </main>
 
 <style>

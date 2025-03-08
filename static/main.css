@@ -5,6 +5,10 @@
     margin: 0;
 }
 
+html {
+    font-size: 14px;
+}
+
 :root {
     --color-brand: #a1ff09;
     --color-white: #fff;

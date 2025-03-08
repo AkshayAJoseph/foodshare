@@ -8,7 +8,7 @@ import { Geolocation } from "@capacitor/geolocation";
   let location;
 
 
-const genAI = new GoogleGenerativeAI("AIzaSyADobf5_FldOe73uqlXYXaotxsQ28980RU");
+const genAI = new GoogleGenerativeAI("AIzaSyDXcaiZLmJZ2uaFr4U6FCULZQ2YwYc8Lpg");
 
 const baseUrl = "https://api.laddu.cc/api/v1";
 
@@ -282,5 +282,32 @@ function handleBackButton(fallbackUrl) {
     return R * c; // Distance in meters
 }
 
+
+
+import { PushNotifications } from '@capacitor/push-notifications';
+
+/**
+ * Initialize and register push notifications
+ */
+export const initPushNotifications = () => {
+  // Request permission for push notifications
+  PushNotifications.requestPermissions().then(permission => {
+    if (permission.receive === 'granted') {
+      // Register the device for push notifications
+      PushNotifications.register();
+    }
+  });
+
+  // Handle successful registration and get FCM token
+  PushNotifications.addListener('registration', token => {
+    console.log('FCM Token:', token.value);
+    // Send token to backend if needed
+  });
+
+  // Handle registration errors
+  PushNotifications.addListener('registrationError', error => {
+    console.error('Push registration error:', error);
+  });
+};
 
   export {handleBackButton, checkUser, logout, login, signup, takephoto, getArr, addfood, getfoods, getCoords, getDistance}

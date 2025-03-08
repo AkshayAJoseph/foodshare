@@ -1,26 +1,14 @@
 <script>
-    import { getCoords, getDistance, getfoods } from "../../script";
+    import { getfoods } from "../../script";
     import { onMount } from "svelte";
 
-    let selectedValue = $state(0); // Default integer value
-
-    let data = $state([]);
-    let loading = $state(true);
+    let data = [];
+    let loading = true;
 
     const doFetch = async () => {
         data = await getfoods();
-        console.log("Before Sorting:", data);
-        const ucoords = await getCoords();
-        const lonu = ucoords.longitude;
-        const latu = ucoords.latitude;
-        console.log(ucoords);
+        data.sort((a, b) => a.hours - b.hours);
 
-        data = data.map((item) => ({
-            ...item,
-            distance: getDistance(latu, lonu, item.latitude, item.longitude),
-        }));
-        data.sort((a, b) => a.distance - b.distance);
-        console.log("After Sorting:", data);
         loading = false;
     };
 
@@ -43,10 +31,10 @@
                     <div class="card__row">
                         <div class="card__row__text">
                             <h1>{item.name}</h1>
-                            <p>{item.distance}</p>
+                            <p>{item.lifespan} hours</p>
                         </div>
                         <div class="card__row__buttons">
-                            <h5>{item.stats || item.quantity}</h5>
+                            <h5>{item.tags || item.quantity}</h5>
                             <a href="/food">
                                 <img src="/eye.svg" alt="" />
                             </a>

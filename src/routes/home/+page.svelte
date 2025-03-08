@@ -61,12 +61,19 @@
     };
 
     onMount(() => {
-        fetchNearbyFoods();
+        //fetchNearbyFoods();
     });
 </script>
 
 <main>
-    {#if loading || expiringLoading || nearbyLoading}
+    <!--component
+    my phone's gps died so
+    {#if loading || expiringLoading}
+        <p>Loading...</p>
+    {:else}
+    -->
+    --
+    {#if loading || expiringLoading}
         <p>Loading...</p>
     {:else}
         <Header h1="Welcome," h5={data.name} />
@@ -141,7 +148,6 @@
                 {/each}
             </div>
         </div>
-        <button onclick={logout}>logout</button>
         <br />
     {/if}
     <Navigation />

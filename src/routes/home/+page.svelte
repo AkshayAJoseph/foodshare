@@ -73,7 +73,7 @@
                 </div>
                 <p>Offer surplus food to support community needs</p>
                 <div class="card__small">
-                    <a href="/shutter" class="small">
+                    <a href="/add-food" class="small">
                         <img src="/aperture.svg" alt="" />
                     </a>
                     <a href="/upload" class="small">

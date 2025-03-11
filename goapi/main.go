@@ -34,5 +34,5 @@ func main() {
 	routes.UserRoutes(db, app)
 	routes.FoodRoutes(db, app)
 
-	app.Listen(":8080")
+	app.Listen("0.0.0.0:8080")
 }

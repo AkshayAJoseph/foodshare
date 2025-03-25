@@ -5,13 +5,19 @@ import { Camera, CameraResultType, CameraSource } from "@capacitor/camera";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { onMount } from 'svelte';
 import { Geolocation } from "@capacitor/geolocation";
+let videoElement = null;
+let canvasElement = null;
+let ctx = null;
+let socket = null;
   let location;
 
 
 const genAI = new GoogleGenerativeAI("AIzaSyDXcaiZLmJZ2uaFr4U6FCULZQ2YwYc8Lpg");
 
-const baseUrl = "https://api.laddu.cc/api/v1";
-
+const baseUrl = "https://foodshare.laddu.cc/api/v1";
+const socketUrl = "wss://api2.laddu.cc/ws";
+const googleyKey = 'AIzaSyACpYa3lasStiBTXV1drk6_sd77EtqI-CA';
+const searchEngineId = '72dfafcb43d704ac9';
 
 async function setToken(token) {
   await Storage.set({
@@ -145,7 +151,7 @@ function handleBackButton(fallbackUrl) {
     }
   }
 
-  async function runAI(base64) {
+  async function  runAI(base64) {
     try {
       const prompt =
         "if the image has any products in it send only a json containing {name,quantity,lifespan,category} lifespan being an estimate of the food life in hours, the quantity being the number of servings of the product in the picture, category being either 'veg' or 'non-veg', of all unique products seen in the picture";
@@ -218,8 +224,17 @@ function handleBackButton(fallbackUrl) {
   async function addfood(data,longitude,latitude) {
     try {
       
+      const url = await fetchImage(data.name);
+      if (url) {
+        console.log("Image URL:", url);
+      } else {
+        console.log("No image found.");
+      }
       data.longitude = longitude;
       data.latitude = latitude;
+      data.lifespan = Number(data.lifespan)
+      data.quantity = Number(data.quantity)
+      data.banner = url;
       console.log(data);
       const response = await fetch(`${baseUrl}/food`, {
         method: "POST",
@@ -337,4 +352,113 @@ async function getfood(id) {
   }
 }
 
-  export {handleBackButton, checkUser, logout, login, signup, takephoto, getArr, addfood, getfoods, getCoords, getDistance, mapsLink, getfood}
+function startWebsocket() {
+  try{
+    socket = new WebSocket(socketUrl);
+    socket.onopen = function (e) {
+      alert("[open] Connection established");
+  
+      socket.onclose = function (event) {
+        if (event.wasClean) {
+          alert(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
+        } else {
+          alert("[close] Connection died");
+        }
+      };
+  
+      socket.onerror = function (error) {
+        alert(`[error] ${error.message}`);
+      };
+    }
+  }
+  catch(error){
+    alert("Error accessing WebSocket " + error);
+  }
+
+
+}
+
+async function startCamera() {
+
+  if (videoElement) return; 
+
+  videoElement = document.createElement("video");
+  videoElement.autoplay = true;
+  videoElement.playsInline = true; // Ensure iOS compatibility
+  videoElement.style.width = "100%"; // Adjust size as needed
+
+  document.body.appendChild(videoElement); // Add to page
+
+  try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      videoElement.srcObject = stream;
+
+      canvasElement = document.createElement("canvas");
+        ctx = canvasElement.getContext("2d");
+  } catch (error) {
+      console.error("Error accessing camera:", error);
+  }
+}
+
+async function captureFrame() {
+  if (!videoElement || !canvasElement || !ctx) {
+    return null;
+  }
+
+  canvasElement.width = videoElement.videoWidth;
+  canvasElement.height = videoElement.videoHeight;
+
+  ctx.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
+
+  // Convert to Base64
+  return canvasElement.toDataURL("image/jpeg",0.5); // or "image/png"
+}
+
+function sendToBackend(base64String) {
+  if (socket.readyState === WebSocket.OPEN) {
+    socket.send(base64String);
+} else {
+    console.log('Socket not open');
+    goto("/", { replaceState: true }) 
+}
+}
+
+function stopCamera() {
+  if (stream) {
+      stream.getTracks().forEach(track => track.stop()); // Stop all camera tracks
+  }
+
+  if (videoElement) {
+      videoElement.remove(); // Remove the video from the page
+      videoElement = null; // Reset variable
+      stream = null; // Reset stream
+  }
+}
+
+function cameraBack() {
+  if (typeof window !== 'undefined' && typeof sessionStorage !== 'undefined') {
+
+  App.addListener("backButton", () => {
+      const prevPage = sessionStorage.getItem("fallbackPage");
+    stopCamera();
+  });
+} else {
+}}
+
+async function fetchImage(query) {
+  try {
+    const apiUrl = `https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(query)}&cx=${searchEngineId}&searchType=image&key=${googleyKey}&num=1`;
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    if (data.items && data.items.length > 0) {
+      return data.items[0].link;
+    } else {
+      throw new Error('No image found for the query.');
+    }
+  } catch (error) {
+    console.error('Error fetching image:', error);
+    return null;
+  }
+}
+
+  export {handleBackButton, checkUser, logout, login, signup, takephoto, getArr, addfood, getfoods, getCoords, getDistance, mapsLink, getfood, startWebsocket, startCamera, sendToBackend, cameraBack, stopCamera, captureFrame, fetchImage }
